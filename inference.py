@@ -18,8 +18,8 @@ import cv2
 import torch
 from torch import nn
 
-import imgproc
 import model
+import imgproc
 from utils import load_state_dict
 
 model_names = sorted(

@@ -141,14 +141,14 @@ def load_dataset() -> [CUDAPrefetcher, CUDAPrefetcher]:
                                   num_workers=srresnet_config.num_workers,
                                   pin_memory=True,
                                   drop_last=True,
-                                  persistent_workers=True)
+                                  persistent_workers=False)
     test_dataloader = DataLoader(test_datasets,
                                  batch_size=1,
                                  shuffle=False,
                                  num_workers=1,
                                  pin_memory=True,
                                  drop_last=False,
-                                 persistent_workers=True)
+                                 persistent_workers=False)
 
     # Place all data on the preprocessing data loader
     train_prefetcher = CUDAPrefetcher(train_dataloader, srresnet_config.device)
@@ -161,7 +161,7 @@ def build_model() -> nn.Module:
     srresnet_model = model.__dict__[srresnet_config.g_arch_name](in_channels=srresnet_config.in_channels,
                                                                  out_channels=srresnet_config.out_channels,
                                                                  channels=srresnet_config.channels,
-                                                                 num_blocks=srresnet_config.num_blocks)
+                                                                 num_rcb=srresnet_config.num_rcb)
     srresnet_model = srresnet_model.to(device=srresnet_config.device)
 
     return srresnet_model

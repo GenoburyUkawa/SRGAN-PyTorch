@@ -34,7 +34,7 @@ def load_state_dict(
         optimizer: torch.optim.Optimizer = None,
         scheduler: torch.optim.lr_scheduler = None,
         load_mode: str = None,
-) -> tuple[Module, Module, Any, Any, Any, Optimizer | None, Any] | tuple[Module, Any, Any, Any, Optimizer | None, Any] | Module:
+) -> tuple[Module, Module, Any, Any, Any, Optimizer, Any]:
     # Load model weights
     checkpoint = torch.load(model_weights_path, map_location=lambda storage, loc: storage)
 

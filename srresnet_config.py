@@ -36,6 +36,7 @@ channels = 64
 num_rcb = 16
 # Test upscale factor
 upscale_factor = 4
+
 # Current configuration parameter method
 mode = "train"
 # Experiment name, easy to save weights and log files
@@ -50,7 +51,7 @@ if mode == "train":
 
     gt_image_size = 96
     batch_size = 16
-    num_workers = 4
+    num_workers = 0
 
     # The address to load the pretrained model
     pretrained_model_weights_path = f""

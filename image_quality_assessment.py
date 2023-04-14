@@ -16,14 +16,13 @@ import math
 import typing
 import warnings
 from itertools import repeat
-from typing import Any
 
 import cv2
 import numpy as np
 import torch
 from numpy import ndarray
 from scipy.io import loadmat
-from scipy.ndimage.filters import convolve
+from scipy.ndimage import convolve
 from scipy.special import gamma
 from torch import nn
 from torch.nn import functional as F
@@ -202,7 +201,7 @@ def _estimate_aggd_parameters(vector: np.ndarray) -> [np.ndarray, float, float]:
     return aggd_parameters, left_beta, right_beta
 
 
-def _get_mscn_feature(image: np.ndarray) -> list[float | Any]:
+def _get_mscn_feature(image: np.ndarray ) -> list[float ]:
     """Python implements the NIQE (Natural Image Quality Evaluator) function,
     This function is used to calculate the MSCN feature map
 
@@ -581,7 +580,7 @@ def _to_tuple(n):
 
 
 def _excact_padding_2d(tensor: torch.Tensor,
-                       kernel: torch.Tensor | tuple,
+                       kernel: torch.Tensor ,
                        stride: int = 1,
                        dilation: int = 1,
                        mode: str = "same") -> torch.Tensor:
