@@ -19,13 +19,17 @@ from torch import nn
 from torch import optim
 from torch.cuda import amp
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
 
 import model
 import srresnet_config
 from dataset import CUDAPrefetcher, TrainValidImageDataset, TestImageDataset
 from image_quality_assessment import PSNR, SSIM
 from utils import load_state_dict, make_directory, save_checkpoint, AverageMeter, ProgressMeter
+
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+from torch.utils.tensorboard import SummaryWriter
 
 model_names = sorted(
     name for name in model.__dict__ if
@@ -90,6 +94,9 @@ def main():
     psnr_model = psnr_model.to(device=srresnet_config.device)
     ssim_model = ssim_model.to(device=srresnet_config.device)
 
+    log_dir = "./train_log/test_log_dir4"
+    writer = SummaryWriter(log_dir=log_dir, comment='test_comment', filename_suffix="test_suffix")
+
     for epoch in range(start_epoch, srresnet_config.epochs):
         train(srresnet_model,
               train_prefetcher,
@@ -124,6 +131,8 @@ def main():
                         "g_last.pth.tar",
                         is_best,
                         is_last)
+        writer.add_scalar('psnr', best_psnr, epoch + 1)
+        writer.add_scalar('ssim', best_ssim, epoch + 1)
 
 
 def load_dataset() -> [CUDAPrefetcher, CUDAPrefetcher]:

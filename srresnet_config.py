@@ -56,8 +56,8 @@ if mode == "train":
     # The address to load the pretrained model
     pretrained_model_weights_path = f""
 
-    # Incremental training and migration training
-    resume_model_weights_path = f""
+    # Incremental training and migration training 增量训练和迁移训练
+    resume_model_weights_path = "./results/SRResNet_x4-ImageNet/g_best.pth.tar"
 
     # Total num epochs (1,000,000 iters)
     epochs = 90

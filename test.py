@@ -87,6 +87,8 @@ def main() -> None:
         # Cal IQA metrics
         psnr_metrics += psnr(sr_tensor, gt_tensor).item()
         ssim_metrics += ssim(sr_tensor, gt_tensor).item()
+        # print(f"PSNR: {psnr(sr_tensor, gt_tensor).item():4.2f} [dB]\n"
+        #       f"SSIM: {ssim(sr_tensor, gt_tensor).item():4.4f} [u]")
 
     # Calculate the average value of the sharpness evaluation index,
     # and all index range values are cut according to the following values

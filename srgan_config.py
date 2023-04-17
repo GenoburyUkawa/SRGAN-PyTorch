@@ -38,9 +38,9 @@ num_rcb = 16
 # Test upscale factor
 upscale_factor = 4
 # Current configuration parameter method
-mode = "test"
+mode = "train"
 # Experiment name, easy to save weights and log files
-exp_name = "SRGAN_x4-DIV2K"
+exp_name = "SRResNet_x4-ImageNet"
 
 if mode == "train":
     # Dataset address
@@ -51,11 +51,11 @@ if mode == "train":
 
     gt_image_size = 96
     batch_size = 16
-    num_workers = 4
+    num_workers = 1
 
     # The address to load the pretrained model
     pretrained_d_model_weights_path = f""
-    pretrained_g_model_weights_path = f"./results/SRResNet_x4-DIV2K/g_last.pth.tar"
+    pretrained_g_model_weights_path = f"./results/SRResNet_x4-ImageNet/g_last.pth.tar"
 
     # Incremental training and migration training
     resume_d_model_weights_path = f""
@@ -93,5 +93,4 @@ if mode == "test":
     lr_dir = f"./data/Set5/LRbicx{upscale_factor}"
     sr_dir = f"./results/test/{exp_name}"
     gt_dir = f"data/Set5/GTmod12"
-
-    g_model_weights_path = f"results/pretrained_models/SRGAN_x4-ImageNet-8c4a7569.pth.tar"
+    g_model_weights_path = f"results/SRResNet_x4-ImageNet/g_best.pth.tar"

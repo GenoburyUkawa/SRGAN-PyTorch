@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+# 用于计算图像的损失值SSIM\PSNR等
 import collections.abc
 import math
 import typing
@@ -168,7 +169,7 @@ def ssim(raw_image: np.ndarray, dst_image: np.ndarray, crop_border: int, only_te
 def _estimate_aggd_parameters(vector: np.ndarray) -> [np.ndarray, float, float]:
     """Python implements the NIQE (Natural Image Quality Evaluator) function,
     This function is used to estimate an asymmetric generalized Gaussian distribution
-
+    该函数用于估计非对称广义高斯分布
     Reference papers:
         `Estimation of shape parameter for generalized Gaussian distributions in subband decompositions of video`
 
