@@ -28,19 +28,26 @@ cudnn.benchmark = True
 # When evaluating the performance of the SR model, whether to verify only the Y channel image data
 only_test_y_channel = True
 # Model architecture name
+
+# 判别网络
 d_arch_name = "discriminator"
+# 生成网络
 g_arch_name = "srresnet_x4"
 # Model arch config
 in_channels = 3
 out_channels = 3
+# channels指定了每层网络的通道数。在这里，64是每层网络的通道数，即超分辨率神经网络的每一个层都使用64个通道
 channels = 64
+
+# num_rcb表示用于构建生成器的残差卷积块（Residual Convolutional Block，RCB）的数量。
+# 每个RCB包含两个卷积操作和一个残差连接，用于提取高维特征和维持信息的一致性。
 num_rcb = 16
 # Test upscale factor
 upscale_factor = 4
 # Current configuration parameter method
 mode = "train"
 # Experiment name, easy to save weights and log files
-exp_name = "SRResNet_x4-ImageNet"
+exp_name = "SRGAN_x4-ImageNet1"
 
 if mode == "train":
     # Dataset address
@@ -93,4 +100,4 @@ if mode == "test":
     lr_dir = f"./data/Set5/LRbicx{upscale_factor}"
     sr_dir = f"./results/test/{exp_name}"
     gt_dir = f"data/Set5/GTmod12"
-    g_model_weights_path = f"results/SRResNet_x4-ImageNet/g_best.pth.tar"
+    g_model_weights_path = f"results/pretrained_models/SRGAN_x4-ImageNet-8c4a7569.pth.tar"

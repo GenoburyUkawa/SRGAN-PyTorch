@@ -40,7 +40,7 @@ upscale_factor = 4
 # Current configuration parameter method
 mode = "train"
 # Experiment name, easy to save weights and log files
-exp_name = "SRResNet_x4-ImageNet"
+exp_name = "SRResNet_x4-ImageNet4"
 
 if mode == "train":
     # Dataset address
@@ -57,7 +57,7 @@ if mode == "train":
     pretrained_model_weights_path = f""
 
     # Incremental training and migration training 增量训练和迁移训练
-    resume_model_weights_path = "./results/SRResNet_x4-ImageNet/g_best.pth.tar"
+    resume_model_weights_path = "./samples/SRGAN_x4-ImageNet/g_epoch_18.pth.tar"
 
     # Total num epochs (1,000,000 iters)
     epochs = 90
@@ -65,14 +65,26 @@ if mode == "train":
     # loss function weights
     loss_weights = 1.0
 
-    # Optimizer parameter
+    # 这是Adam优化器的参数。Adam是一种自适应学习率的优化算法，在更新参数的时候，除了学习率的大小，
+    # 还考虑了过去的梯度平方的均值对学习率的影响，通过这种方式来更加灵活地调整学习率
+
+    # 代表模型的学习率，即每一次训练模型更新的步长大小
     model_lr = 1e-4
+
+    # 代表Adam优化器中的beta1和beta2的值。beta1和beta2分别是用于一阶和二阶动量估计的指数衰减率，通俗来说，一阶动量是过去梯度的平均数，
+    # 用于估计梯度的大小和方向而二阶动量是过去梯度的平方值的平均数，用于估计梯度的差异性。推荐的默认值是beta1=0.9，beta2=0.999
     model_betas = (0.9, 0.999)
+
+    # 代表Adam优化器的一个数值稳定性参数，通过在分母上加上一个小的值来确保数值稳定性。推荐的默认值是1e-8
     model_eps = 1e-8
+
+    # 代表权重衰减（L2正则化）的系数，用于控制模型的复杂度。权重衰减会在优化过程中减小权重的值，并使其趋向于更小的值，以避免过拟合
     model_weight_decay = 0.0
 
     # How many iterations to print the training result
+    # 训练过程中打印日志的频率参数
     train_print_frequency = 100
+    # 验证过程中打印日志的频率参数
     valid_print_frequency = 1
 
 if mode == "test":

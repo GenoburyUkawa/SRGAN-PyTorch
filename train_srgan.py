@@ -273,8 +273,14 @@ def train(
     pixel_losses = AverageMeter("Pixel loss", ":6.6f")
     content_losses = AverageMeter("Content loss", ":6.6f")
     adversarial_losses = AverageMeter("Adversarial loss", ":6.6f")
+
+    # 表示判别器对于真实高分辨率图像的分数
     d_gt_probabilities = AverageMeter("D(GT)", ":6.3f")
+
+    # 判别器对于生成的低分辨率图像通过超分辨率放大后得到的图像的分数
     d_sr_probabilities = AverageMeter("D(SR)", ":6.3f")
+
+
     progress = ProgressMeter(batches,
                              [batch_time, data_time,
                               pixel_losses, content_losses, adversarial_losses,

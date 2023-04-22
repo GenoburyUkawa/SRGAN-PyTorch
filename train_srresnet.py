@@ -94,8 +94,8 @@ def main():
     psnr_model = psnr_model.to(device=srresnet_config.device)
     ssim_model = ssim_model.to(device=srresnet_config.device)
 
-    log_dir = "./train_log/test_log_dir4"
-    writer = SummaryWriter(log_dir=log_dir, comment='test_comment', filename_suffix="test_suffix")
+    # log_dir = "./train_log/test_log_dir4"
+    # writer = SummaryWriter(log_dir=log_dir, comment='test_comment', filename_suffix="test_suffix")
 
     for epoch in range(start_epoch, srresnet_config.epochs):
         train(srresnet_model,
@@ -131,8 +131,8 @@ def main():
                         "g_last.pth.tar",
                         is_best,
                         is_last)
-        writer.add_scalar('psnr', best_psnr, epoch + 1)
-        writer.add_scalar('ssim', best_ssim, epoch + 1)
+        # writer.add_scalar('psnr', best_psnr, epoch + 1)
+        # writer.add_scalar('ssim', best_ssim, epoch + 1)
 
 
 def load_dataset() -> [CUDAPrefetcher, CUDAPrefetcher]:
